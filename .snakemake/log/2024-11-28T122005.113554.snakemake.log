@@ -1,0 +1,73 @@
+host: Malda
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+step2        1
+step3        1
+step4        1
+total        4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Nov 28 12:20:05 2024]
+localrule step2:
+    input: raw/pmids.xml
+    output: clean/articles.tsv
+    log: logs/step2.log
+    jobid: 3
+    reason: Missing output files: clean/articles.tsv
+    resources: tmpdir=/tmp
+
+[Thu Nov 28 12:24:23 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Nov 28 12:24:23 2024]
+localrule step3:
+    input: clean/articles.tsv
+    output: clean/processed_titles.tsv
+    log: logs/step3.log
+    jobid: 2
+    reason: Missing output files: clean/processed_titles.tsv; Input files updated by another job: clean/articles.tsv
+    resources: tmpdir=/tmp
+
+[Thu Nov 28 12:24:25 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Nov 28 12:24:25 2024]
+localrule step4:
+    input: clean/processed_titles.tsv
+    output: clean/top_10_words_frequency_over_time.png
+    log: logs/step4.log
+    jobid: 1
+    reason: Missing output files: clean/top_10_words_frequency_over_time.png; Input files updated by another job: clean/processed_titles.tsv
+    resources: tmpdir=/tmp
+
+[Thu Nov 28 12:24:29 2024]
+Finished job 1.
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Nov 28 12:24:29 2024]
+localrule all:
+    input: clean/top_10_words_frequency_over_time.png
+    jobid: 0
+    reason: Input files updated by another job: clean/top_10_words_frequency_over_time.png
+    resources: tmpdir=/tmp
+
+[Thu Nov 28 12:24:29 2024]
+Finished job 0.
+4 of 4 steps (100%) done
+Complete log: .snakemake/log/2024-11-28T122005.113554.snakemake.log
